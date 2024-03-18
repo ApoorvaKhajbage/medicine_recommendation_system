@@ -116,6 +116,14 @@ def developer():
     return render_template("developer.html")
 
 # about view funtion and path
+@app.route('/result')
+def result():
+    return render_template("result.html")
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route('/blog')
 def blog():
     return render_template("blog.html")

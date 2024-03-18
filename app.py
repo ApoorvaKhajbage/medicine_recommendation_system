@@ -72,16 +72,14 @@ def index():  # put application's code here
     return render_template('index.html')
 
 # Define a route for the home page
-@app.route('/predict', methods=['GET', 'POST'])
-def home():
+@app.route('/predict', methods=[ 'POST' , 'GET'])
+def predict():
     if request.method == 'POST':
         symptoms = request.form.get('symptoms')
-        # mysysms = request.form.get('mysysms')
-        # print(mysysms)
         print(symptoms)
-        if symptoms =="Symptoms":
-            message = "Please either write symptoms or you have written misspelled symptoms"
-            return render_template('index.html', message=message)
+        if symptoms ==" ":
+            message = "PLEASE ENTER CORRECT SYMPTOMS OR CHECK THE INPUT FORMAT"
+            return render_template('dashboard.html', message=message)
         else:
 
             # Split the user's input into a list of symptoms (assuming they are comma-separated)
@@ -89,22 +87,31 @@ def home():
             # Remove any extra characters, if any
             user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
             predicted_disease = get_predicted_value(user_symptoms)
-            dis_des, precautions, medications, rec_diet, workout = helper(predicted_disease)
+            if(predicted_disease == 0):
+                message = "PLEASE ENTER CORRECT SYMPTOMS OR CHECK THE INPUT FORMAT"
+                return render_template('dashboard.html', message=message)
+            
+            description, precautions, medications, diet, workout = helper(predicted_disease)
 
             my_precautions = []
             for i in precautions[0]:
                 my_precautions.append(i)
 
-            return render_template('index.html', predicted_disease=predicted_disease, dis_des=dis_des,
-                                   my_precautions=my_precautions, medications=medications, my_diet=rec_diet,
+            return render_template('dashboard.html', predicted_disease=predicted_disease, description=description,
+                                   precautions=my_precautions, medications=medications, diet=diet,
                                    workout=workout)
 
-    return render_template('index.html')
+    return render_template('dashboard.html')
 
 # about view funtion and path
 @app.route('/about')
 def about():
     return render_template("about.html")
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
+
 # contact view funtion and path
 @app.route('/contact')
 def contact():
@@ -116,13 +123,7 @@ def developer():
     return render_template("developer.html")
 
 # about view funtion and path
-@app.route('/result')
-def result():
-    return render_template("result.html")
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template("dashboard.html")
 
 @app.route('/blog')
 def blog():
@@ -131,3 +132,6 @@ def blog():
 # python main
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+

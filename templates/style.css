@@ -1,0 +1,15 @@
+
+.customLink{
+    color: rgba(0, 0, 0, 0.559);
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    display: block;
+    padding: .3rem 1rem
+}
+.customLink:hover{
+    text-decoration: none;
+    color: rgb(26, 76, 112);
+    /* background: #84d8ff; */
+    border-radius: 20%;   
+}

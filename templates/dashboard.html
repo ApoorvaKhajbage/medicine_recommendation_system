@@ -283,7 +283,22 @@
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script> -->
+        <script>
+        // Function to scroll the cards section up
+        function scrollCardsSectionUp() {
+            // Scroll to the cards section
+            document.querySelector(".cont").scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
+    <!-- Check if predicted_disease exists and scroll the cards section up -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if ("{{ predicted_disease }}") {
+                scrollCardsSectionUp();
+            }
+        });
+    </script>
 </body>
 
 </html>

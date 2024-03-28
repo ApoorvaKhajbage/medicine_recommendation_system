@@ -17,7 +17,7 @@ diets = pd.read_csv("datasets/diets.csv")
 
 #===================================== load model===========================================
 
-svc = pickle.load(open('models/svc.pkl','rb'))
+svc = pickle.load(open('models/svc_model.pkl','rb'))
 
 #==========================================================================================
 # custom helping functions
@@ -117,17 +117,7 @@ def dashboard():
 def contact():
     return render_template("contact.html")
 
-# developer view funtion and path
-@app.route('/developer')
-def developer():
-    return render_template("developer.html")
 
-# about view funtion and path
-
-
-@app.route('/blog')
-def blog():
-    return render_template("blog.html")
 
 # python main
 if __name__ == '__main__':
